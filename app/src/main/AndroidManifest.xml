@@ -19,7 +19,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.VinylMusicPlayer.Light"
+        android:theme="@style/Theme.VinylMusicPlayer"
         tools:ignore="UnusedAttribute">
         <activity android:name="com.poupa.vinylmusicplayer.ui.activities.MainActivity">
             <intent-filter>
