@@ -1041,34 +1041,11 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
 
     private void notifyChange(@NonNull final String what) {
         handleAndSendChangeInternal(what);
-        sendPublicIntent(what);
     }
 
     private void handleAndSendChangeInternal(@NonNull final String what) {
         handleChangeInternal(what);
         sendChangeInternal(what);
-    }
-
-    // to let other apps know whats playing. i.E. last.fm (scrobbling) or musixmatch
-    private void sendPublicIntent(@NonNull final String what) {
-        final Intent intent = new Intent(what.replace(VINYL_MUSIC_PLAYER_PACKAGE_NAME, MUSIC_PACKAGE_NAME));
-
-        final Song song = getCurrentSong();
-
-        intent.putExtra("id", song.id);
-
-        intent.putExtra("artist", song.artistName);
-        intent.putExtra("album", song.albumName);
-        intent.putExtra("track", song.title);
-
-        intent.putExtra("duration", song.duration);
-        intent.putExtra("position", (long) getSongProgressMillis());
-
-        intent.putExtra("playing", isPlaying());
-
-        intent.putExtra("scrobbling_source", VINYL_MUSIC_PLAYER_PACKAGE_NAME);
-
-        sendStickyBroadcast(intent);
     }
 
     private void sendChangeInternal(final String what) {
@@ -1390,7 +1367,6 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         @Override
         public void run() {
             savePositionInTrack();
-            sendPublicIntent(PLAY_STATE_CHANGED); // for musixmatch synced lyrics
         }
     }
 
