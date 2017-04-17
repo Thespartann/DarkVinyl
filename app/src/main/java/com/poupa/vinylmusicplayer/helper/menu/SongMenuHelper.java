@@ -1,6 +1,7 @@
 package com.poupa.vinylmusicplayer.helper.menu;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
@@ -16,9 +17,12 @@ import com.poupa.vinylmusicplayer.helper.MusicPlayerRemote;
 import com.poupa.vinylmusicplayer.interfaces.PaletteColorHolder;
 import com.poupa.vinylmusicplayer.model.Song;
 import com.poupa.vinylmusicplayer.ui.activities.tageditor.AbsTagEditorActivity;
+import com.poupa.vinylmusicplayer.ui.activities.tageditor.PluginUtils;
 import com.poupa.vinylmusicplayer.ui.activities.tageditor.SongTagEditorActivity;
 import com.poupa.vinylmusicplayer.util.MusicUtil;
 import com.poupa.vinylmusicplayer.util.NavigationUtil;
+
+import java.io.File;
 
 /**
  * @author Karim Abou Zeid (kabouzeid)
@@ -47,12 +51,27 @@ public class SongMenuHelper {
                 MusicPlayerRemote.enqueue(song);
                 return true;
             case R.id.action_tag_editor:
-                Intent tagEditorIntent = new Intent(activity, SongTagEditorActivity.class);
-                tagEditorIntent.putExtra(AbsTagEditorActivity.EXTRA_ID, song.id);
-                if (activity instanceof PaletteColorHolder)
-                    tagEditorIntent.putExtra(AbsTagEditorActivity.EXTRA_PALETTE, ((PaletteColorHolder) activity).getPaletteColor());
-                activity.startActivity(tagEditorIntent);
+                
+                if (PluginUtils.checkPlugins(activity)) {
+                    Intent request = new Intent(PluginUtils.ACTION_LAUNCH_PLUGIN);
+                    request.setPackage("com.kanedias.vanilla.audiotag");
+                    request.putExtra(PluginUtils.EXTRA_PARAM_URI, Uri.fromFile(new File(song.data)));
+                    request.putExtra(PluginUtils.EXTRA_PARAM_SONG_TITLE, song.title);
+                    request.putExtra(PluginUtils.EXTRA_PARAM_SONG_ARTIST, song.artistName);
+                    request.putExtra(PluginUtils.EXTRA_PARAM_SONG_ALBUM, song.albumName);
+                    activity.startService(request);
+                } else {
+                    Intent tagEditorIntent = new Intent(activity, SongTagEditorActivity.class);
+                    tagEditorIntent.putExtra(AbsTagEditorActivity.EXTRA_ID, song.id);
+                    if (activity instanceof PaletteColorHolder)
+                        tagEditorIntent.putExtra(AbsTagEditorActivity.EXTRA_PALETTE, ((PaletteColorHolder) 
+activity).getPaletteColor());
+                    activity.startActivity(tagEditorIntent);
+                }
                 return true;
+                
+                
+                
             case R.id.action_details:
                 SongDetailDialog.create(song).show(activity.getSupportFragmentManager(), "SONG_DETAILS");
                 return true;
