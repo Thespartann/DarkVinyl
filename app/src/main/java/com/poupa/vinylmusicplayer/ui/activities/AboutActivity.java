@@ -18,7 +18,6 @@ import com.kabouzeid.appthemehelper.ThemeStore;
 import com.poupa.vinylmusicplayer.R;
 import com.poupa.vinylmusicplayer.dialogs.ChangelogDialog;
 import com.poupa.vinylmusicplayer.ui.activities.base.AbsBaseActivity;
-import com.poupa.vinylmusicplayer.ui.activities.bugreport.BugReportActivity;
 import com.poupa.vinylmusicplayer.ui.activities.intro.AppIntroActivity;
 
 import butterknife.BindView;
@@ -73,8 +72,6 @@ public class AboutActivity extends AbsBaseActivity implements View.OnClickListen
     LinearLayout forkOnGitHub;
     @BindView(R.id.visit_website)
     LinearLayout visitWebsite;
-    @BindView(R.id.report_bugs)
-    LinearLayout reportBugs;
     @BindView(R.id.rate_on_google_play)
     LinearLayout rateOnGooglePlay;
     @BindView(R.id.kabouzeid_google_plus)
@@ -139,7 +136,6 @@ public class AboutActivity extends AbsBaseActivity implements View.OnClickListen
         licenses.setOnClickListener(this);
         forkOnGitHub.setOnClickListener(this);
         visitWebsite.setOnClickListener(this);
-        reportBugs.setOnClickListener(this);
         writeAnEmail.setOnClickListener(this);
         rateOnGooglePlay.setOnClickListener(this);
         aidanFollestadGooglePlus.setOnClickListener(this);
@@ -186,8 +182,6 @@ public class AboutActivity extends AbsBaseActivity implements View.OnClickListen
             openUrl(GITHUB);
         } else if (v == visitWebsite) {
             openUrl(WEBSITE);
-        } else if (v == reportBugs) {
-            startActivity(new Intent(this, BugReportActivity.class));
         } else if (v == writeAnEmail) {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setData(Uri.parse("mailto:adrien@poupa.fr"));
