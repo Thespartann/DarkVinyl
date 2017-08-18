@@ -36,6 +36,7 @@ import android.widget.Toast;
 import com.bumptech.glide.request.transition.Transition;
 import com.poupa.vinylmusicplayer.R;
 import com.poupa.vinylmusicplayer.appwidgets.AppWidgetBig;
+import com.poupa.vinylmusicplayer.appwidgets.AppWidgetCardBlack;
 import com.poupa.vinylmusicplayer.appwidgets.AppWidgetCard;
 import com.poupa.vinylmusicplayer.appwidgets.AppWidgetClassic;
 import com.poupa.vinylmusicplayer.appwidgets.AppWidgetSmall;
@@ -130,6 +131,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     private AppWidgetClassic appWidgetClassic = AppWidgetClassic.getInstance();
     private AppWidgetSmall appWidgetSmall = AppWidgetSmall.getInstance();
     private AppWidgetCard appWidgetCard = AppWidgetCard.getInstance();
+    private AppWidgetCardBlack appWidgetCardBlack = AppWidgetCardBlack.getInstance();
 
     private Playback playback;
     private ArrayList<Song> playingQueue = new ArrayList<>();
@@ -235,7 +237,8 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
 
         PendingIntent mediaButtonReceiverPendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, mediaButtonIntent, 0);
 
-        mediaSession = new MediaSessionCompat(this, "VinylMusicPlayer", mediaButtonReceiverComponentName, mediaButtonReceiverPendingIntent);
+        mediaSession = new MediaSessionCompat(this, "VinylMusicPlayer", mediaButtonReceiverComponentName, 
+mediaButtonReceiverPendingIntent);
         mediaSession.setCallback(new MediaSessionCompat.Callback() {
             @Override
             public void onPlay() {
@@ -308,7 +311,8 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                                 playlistSongs = ((AbsCustomPlaylist) playlist).getSongs(getApplicationContext());
                             } else {
                                 //noinspection unchecked
-                                playlistSongs = (ArrayList<Song>) (List) PlaylistSongLoader.getPlaylistSongList(getApplicationContext(), playlist.id);
+                                playlistSongs = (ArrayList<Song>) (List) 
+PlaylistSongLoader.getPlaylistSongList(getApplicationContext(), playlist.id);
                             }
                             if (!playlistSongs.isEmpty()) {
                                 if (shuffleMode == SHUFFLE_MODE_SHUFFLE) {
@@ -532,7 +536,8 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     }
 
     private boolean requestFocus() {
-        return (getAudioManager().requestAudioFocus(audioFocusListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN) == AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
+        return (getAudioManager().requestAudioFocus(audioFocusListener, AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN) == 
+AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
     }
 
     public void initNotification() {
@@ -1054,6 +1059,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
         appWidgetClassic.notifyChange(this, what);
         appWidgetSmall.notifyChange(this, what);
         appWidgetCard.notifyChange(this, what);
+        appWidgetCardBlack.notifyChange(this, what);
     }
 
     private static final long MEDIA_SESSION_ACTIONS = PlaybackStateCompat.ACTION_PLAY
@@ -1317,6 +1323,10 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
                 }
                 case AppWidgetCard.NAME: {
                     appWidgetCard.performUpdate(MusicService.this, ids);
+                    break;
+                }
+                case AppWidgetCardBlack.NAME: {
+                    appWidgetCardBlack.performUpdate(MusicService.this, ids);
                     break;
                 }
             }

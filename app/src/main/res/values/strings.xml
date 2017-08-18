@@ -249,6 +249,7 @@
     <string name="app_widget_classic_name">Vinyl Music Player - Classic</string>
     <string name="app_widget_small_name">Vinyl Music Player - Small</string>
     <string name="app_widget_card_name">Vinyl Music Player - Card</string>
+    <string name="app_widget_card_name_black">Vinyl Music Player - Black Card</string>
     <string name="report_an_issue">Report an issue</string>
     <string name="bug_report_issue">Issue</string>
     <string name="login">Login</string>
