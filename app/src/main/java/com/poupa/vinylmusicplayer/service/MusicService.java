@@ -40,6 +40,8 @@ import com.poupa.vinylmusicplayer.appwidgets.AppWidgetCardBlack;
 import com.poupa.vinylmusicplayer.appwidgets.AppWidgetCard;
 import com.poupa.vinylmusicplayer.appwidgets.AppWidgetClassic;
 import com.poupa.vinylmusicplayer.appwidgets.AppWidgetClassicBlack;
+import com.poupa.vinylmusicplayer.appwidgets.AppWidgetCardBlackTransparent;
+import com.poupa.vinylmusicplayer.appwidgets.AppWidgetClassicBlackTransparent;
 import com.poupa.vinylmusicplayer.appwidgets.AppWidgetSmall;
 import com.poupa.vinylmusicplayer.glide.BlurTransformation;
 import com.poupa.vinylmusicplayer.glide.GlideApp;
@@ -134,6 +136,8 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     private AppWidgetCard appWidgetCard = AppWidgetCard.getInstance();
     private AppWidgetCardBlack appWidgetCardBlack = AppWidgetCardBlack.getInstance();
     private AppWidgetClassicBlack appWidgetClassicBlack = AppWidgetClassicBlack.getInstance();
+    private AppWidgetCardBlackTransparent appWidgetCardBlackTransparent = AppWidgetCardBlackTransparent.getInstance();
+    private AppWidgetClassicBlackTransparent appWidgetClassicBlackTransparent = AppWidgetClassicBlackTransparent.getInstance();
 
     private Playback playback;
     private ArrayList<Song> playingQueue = new ArrayList<>();
@@ -1063,6 +1067,8 @@ AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
         appWidgetCard.notifyChange(this, what);
         appWidgetCardBlack.notifyChange(this, what);
         appWidgetClassicBlack.notifyChange(this, what);
+        appWidgetCardBlackTransparent.notifyChange(this, what);
+        appWidgetClassicBlackTransparent.notifyChange(this, what);
     }
 
     private static final long MEDIA_SESSION_ACTIONS = PlaybackStateCompat.ACTION_PLAY
@@ -1336,6 +1342,14 @@ AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
                     appWidgetClassicBlack.performUpdate(MusicService.this, ids);
                     break;
                 }
+                case AppWidgetCardBlackTransparent.NAME: {
+                    appWidgetCardBlackTransparent.performUpdate(MusicService.this, ids);
+                    break;
+                }
+                case AppWidgetClassicBlackTransparent.NAME: {
+                    appWidgetClassicBlackTransparent.performUpdate(MusicService.this, ids);
+                    break;
+                }                    
             }
         }
     };
