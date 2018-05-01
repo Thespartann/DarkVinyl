@@ -39,6 +39,7 @@ import com.poupa.vinylmusicplayer.appwidgets.AppWidgetBig;
 import com.poupa.vinylmusicplayer.appwidgets.AppWidgetCardBlack;
 import com.poupa.vinylmusicplayer.appwidgets.AppWidgetCard;
 import com.poupa.vinylmusicplayer.appwidgets.AppWidgetClassic;
+import com.poupa.vinylmusicplayer.appwidgets.AppWidgetClassicBlack;
 import com.poupa.vinylmusicplayer.appwidgets.AppWidgetSmall;
 import com.poupa.vinylmusicplayer.glide.BlurTransformation;
 import com.poupa.vinylmusicplayer.glide.GlideApp;
@@ -132,6 +133,7 @@ public class MusicService extends Service implements SharedPreferences.OnSharedP
     private AppWidgetSmall appWidgetSmall = AppWidgetSmall.getInstance();
     private AppWidgetCard appWidgetCard = AppWidgetCard.getInstance();
     private AppWidgetCardBlack appWidgetCardBlack = AppWidgetCardBlack.getInstance();
+    private AppWidgetClassicBlack appWidgetClassicBlack = AppWidgetClassicBlack.getInstance();
 
     private Playback playback;
     private ArrayList<Song> playingQueue = new ArrayList<>();
@@ -1060,6 +1062,7 @@ AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
         appWidgetSmall.notifyChange(this, what);
         appWidgetCard.notifyChange(this, what);
         appWidgetCardBlack.notifyChange(this, what);
+        appWidgetClassicBlack.notifyChange(this, what);
     }
 
     private static final long MEDIA_SESSION_ACTIONS = PlaybackStateCompat.ACTION_PLAY
@@ -1327,6 +1330,10 @@ AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
                 }
                 case AppWidgetCardBlack.NAME: {
                     appWidgetCardBlack.performUpdate(MusicService.this, ids);
+                    break;
+                }
+                 case AppWidgetClassicBlack.NAME: {
+                    appWidgetClassicBlack.performUpdate(MusicService.this, ids);
                     break;
                 }
             }
