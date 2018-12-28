@@ -115,7 +115,7 @@ public final class PreferenceUtil {
 
     @StyleRes
     public int getGeneralTheme() {
-        return getThemeResFromPrefValue(mPreferences.getString(GENERAL_THEME, "light"));
+        return getThemeResFromPrefValue(mPreferences.getString(GENERAL_THEME, "black"));
     }
 
     public void setGeneralTheme(String theme) {
@@ -129,11 +129,11 @@ public final class PreferenceUtil {
         switch (themePrefValue) {
             case "dark":
                 return R.style.Theme_VinylMusicPlayer;
-            case "black":
-                return R.style.Theme_VinylMusicPlayer_Black;
             case "light":
-            default:
                 return R.style.Theme_VinylMusicPlayer_Light;
+            case "black":
+            default:
+                return R.style.Theme_VinylMusicPlayer_Black;
         }
     }
 
