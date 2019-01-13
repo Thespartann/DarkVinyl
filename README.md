@@ -5,6 +5,9 @@
 <img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90"/></a>
 <a href='https://play.google.com/store/apps/details?id=com.poupa.vinylmusicplayer'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="90"/></a>
 
+Credits to Ezio84 for his nice tweaks for Phonograph
+Repo: https://github.com/ezio84/Phonograph
+
 # HOWTO BUILD
 Run ./build.sh
 The script will build, sign and zipalign the apk, the final apk will be placed in the root of the source directory (Phonograph-release.apk).
