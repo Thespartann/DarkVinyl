@@ -1342,14 +1342,6 @@ AudioManager.AUDIOFOCUS_REQUEST_GRANTED);
                     appWidgetClassicBlack.performUpdate(MusicService.this, ids);
                     break;
                 }
-                case AppWidgetCardBlackTransparent.NAME: {
-                    appWidgetCardBlackTransparent.performUpdate(MusicService.this, ids);
-                    break;
-                }
-                case AppWidgetClassicBlackTransparent.NAME: {
-                    appWidgetClassicBlackTransparent.performUpdate(MusicService.this, ids);
-                    break;
-                }                    
             }
         }
     };
